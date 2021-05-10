@@ -2,15 +2,13 @@ package helper
 
 import (
 	"encoding/csv"
-	"io"
-	"log"
 	"os"
 )
 
 func CreateCSVFile(filename string, header []string) error {
 	file, err := os.Create(filename)
 	if err != nil {
-		log.Fatalln("Error on call CreateCSVFile:", err)
+		return err
 	}
 	defer file.Close()
 
@@ -21,23 +19,20 @@ func CreateCSVFile(filename string, header []string) error {
 	return nil
 }
 
-func NextCSVRecord(r *csv.Reader) []string {
+func NextCSVRecord(r *csv.Reader) ([]string, error) {
 	record, err := r.Read()
-	if err == io.EOF {
-		return nil
-	}
 	if err != nil {
-		log.Fatalln("Error on call NextCSVRecord:", err)
+		return nil, err
 	}
-	return record
+	return record, nil
 }
 
-func CSVRecords(r *csv.Reader, size int) [][]string {
+func CSVRecords(r *csv.Reader, size int) ([][]string, error) {
 	// throw away header
 	r.Read()
 	records, err := r.ReadAll()
 	if err != nil {
-		log.Fatalln("Error on call CSVRecords:", err)
+		return nil, err
 	}
-	return records
+	return records, nil
 }

@@ -38,8 +38,8 @@ func TestNextCSVRecord(t *testing.T) {
 	file, _ := os.OpenFile(testingFile, os.O_RDWR, 0644)
 	csv := csv.NewReader(file)
 
-	record := helper.NextCSVRecord(csv)
-	nextRecord := helper.NextCSVRecord(csv)
+	record, _ := helper.NextCSVRecord(csv)
+	nextRecord, _ := helper.NextCSVRecord(csv)
 
 	var expectedNextRecord []string
 
@@ -61,7 +61,7 @@ func TestGetCSVRecords(t *testing.T) {
 
 	file, _ = os.OpenFile(testingFile, os.O_RDWR, 0644)
 	reader := csv.NewReader(file)
-	records := helper.CSVRecords(reader, 10)
+	records, _ := helper.CSVRecords(reader, 10)
 
 	assert.Equal(t, data, records)
 
