@@ -32,12 +32,12 @@ func NextCSVRecord(r *csv.Reader) []string {
 	return record
 }
 
-func GetCSVRecords(r *csv.Reader, size int) [][]string {
+func CSVRecords(r *csv.Reader, size int) [][]string {
 	// throw away header
 	r.Read()
 	records, err := r.ReadAll()
 	if err != nil {
-		log.Fatalln("Error on call GETCSVRecords:", err)
+		log.Fatalln("Error on call CSVRecords:", err)
 	}
 	return records
 }

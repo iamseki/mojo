@@ -61,7 +61,7 @@ func TestGetCSVRecords(t *testing.T) {
 
 	file, _ = os.OpenFile(testingFile, os.O_RDWR, 0644)
 	reader := csv.NewReader(file)
-	records := helper.GetCSVRecords(reader, 10)
+	records := helper.CSVRecords(reader, 10)
 
 	assert.Equal(t, data, records)
 
