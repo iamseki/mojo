@@ -1,6 +1,10 @@
 # Mojo
 
-<p align="center">Mojo is a helper cli, idealized o help you with repetitive tasks but can becomes very lazy due to adpotion of Homer's unhealthy lifestyle</p>
+<p align="center">Mojo is a helper cli, idealized to help you with repetitive tasks but can becomes very lazy due to adpotion of Homer's unhealthy lifestyle</p>
+
+## Usage :computer:
+
+- **`mojo collect --from=s3 --bucket=etl-pipeline/uuid --file=6.json --output=output.csv --contract=b3prices`**
 
 ## Build and Running :scroll:
 
