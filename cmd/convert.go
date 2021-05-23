@@ -8,7 +8,7 @@ import (
 )
 
 func newConvertCommand() *cobra.Command {
-	var from, to, contract string
+	var from, to, contract, file string
 
 	var convertCmd = &cobra.Command{
 		Use:   "convert",
@@ -24,13 +24,15 @@ func newConvertCommand() *cobra.Command {
 		},
 	}
 
-	convertCmd.Flags().StringVarP(&from, "from", "f", "", "from indicates the file to read the data")
+	convertCmd.Flags().StringVarP(&from, "from", "fr", "", "from indicates the file to read the data")
 	convertCmd.Flags().StringVarP(&to, "to", "t", "t", "to what kind of file the convertion is needed")
 	convertCmd.Flags().StringVarP(&contract, "contract", "c", "", "the contract to be used during convertion")
+	convertCmd.Flags().StringVarP(&file, "file", "f", "", "file to convert")
 
 	convertCmd.MarkFlagRequired("from")
 	convertCmd.MarkFlagRequired("to")
 	convertCmd.MarkFlagRequired("contract")
+	convertCmd.MarkFlagRequired("file")
 
 	return convertCmd
 }

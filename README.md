@@ -4,7 +4,7 @@
 
 ## Usage :computer:
 
-- **`mojo collect --from=s3 --bucket=etl-pipeline/uuid --file=6.json --output=output.csv --contract=b3prices`**
+- **`mojo collect s3 --bucket=etl-pipeline/uuid --file=6.json --output=output.csv --contract=b3prices`**
 
 ## Build and Running :scroll:
 
