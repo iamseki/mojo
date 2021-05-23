@@ -67,9 +67,12 @@ func (fc fileConverter) getContractToConvert() interface{} {
 }
 
 func (fc fileConverter) getCSVInputFromContractData(contractData interface{}) (rows [][]string, header []string) {
-	rows = helper.GetValuesFromSliceStruct(contractData)
 	contractType := reflect.ValueOf(contractData).Index(0).Interface()
-	header = helper.GetFieldsNameFromStruct(contractType)
+	header = helper.GetFieldsNameFromMap(contractType)
+	fmt.Println(header)
+	rows = helper.GetValuesFromSliceMap(contractData)
+	fmt.Println(rows)
+
 	return rows, header
 }
 
