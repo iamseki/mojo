@@ -1,0 +1,17 @@
+[
+  {
+    "TckrSymb": "hey",
+    "LastPrice": "you",
+    "TradDt": "there"
+  },
+  {
+    "TckrSymb": "hey2",
+    "LastPrice": "you2",
+    "TradDt": "there2"
+  },
+  {
+    "TckrSymb": "hey3",
+    "LastPrice": "you3",
+    "TradDt": "there3"
+  }
+]

@@ -2,16 +2,18 @@ package logic
 
 import (
 	"encoding/csv"
+	"fmt"
 	"mojo/contract"
 	"mojo/helper"
 	"os"
+	"reflect"
 )
 
 type ConvertOptions struct {
-	from     string
-	to       string
-	contract string
-	file     string
+	From     string
+	To       string
+	Contract string
+	File     string
 }
 
 type Converter interface {
@@ -51,11 +53,11 @@ func (fc fileConverter) getFromToFunction() func() error {
 		"fromcsvtojson": fc.fromCsvToJson,
 	}
 
-	return fromToFunctions["from"+fc.options.from+"to"+fc.options.to]
+	return fromToFunctions["from"+fc.options.From+"to"+fc.options.To]
 }
 
 func (fc fileConverter) getContractToConvert() interface{} {
-	switch fc.options.contract {
+	switch fc.options.Contract {
 	case "b3":
 		var b3 []contract.B3Price
 		return b3
@@ -65,22 +67,23 @@ func (fc fileConverter) getContractToConvert() interface{} {
 }
 
 func (fc fileConverter) getCSVInputFromContractData(contractData interface{}) (rows [][]string, header []string) {
-	// TO DO
-	// use reflect package to analyze each position of contractData slice
-	// and get its value
-	// this tutorial might be helpful: https://golangbot.com/reflection/
+	rows = helper.GetValuesFromSliceStruct(contractData)
+	contractType := reflect.ValueOf(contractData).Index(0).Interface()
+	header = helper.GetFieldsNameFromStruct(contractType)
 	return rows, header
 }
 
 func (fc fileConverter) fromJsonToCsv() error {
 	contractData := fc.getContractToConvert()
-	jsonFileName := fc.options.file + ".json"
-	csvFileName := fc.options.file + ".csv"
+	jsonFileName := fc.options.File + ".json"
+	csvFileName := fc.options.File + ".csv"
 
 	err := helper.JSONFileToStruct(jsonFileName, &contractData)
 	if err != nil {
 		return err
 	}
+
+	fmt.Println(contractData)
 
 	rows, header := fc.getCSVInputFromContractData(contractData)
 

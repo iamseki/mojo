@@ -21,10 +21,21 @@ func newConvertCommand() *cobra.Command {
 				log.Fatalln(err)
 			}
 
+			c := logic.NewConvertLogic(logic.ConvertOptions{
+				From:     from,
+				To:       to,
+				Contract: contract,
+				File:     file,
+			})
+
+			err = c.Convert()
+			if err != nil {
+				log.Fatalln(err)
+			}
 		},
 	}
 
-	convertCmd.Flags().StringVarP(&from, "from", "fr", "", "from indicates the file to read the data")
+	convertCmd.Flags().StringVarP(&from, "from", "", "", "from indicates the file to read the data")
 	convertCmd.Flags().StringVarP(&to, "to", "t", "t", "to what kind of file the convertion is needed")
 	convertCmd.Flags().StringVarP(&contract, "contract", "c", "", "the contract to be used during convertion")
 	convertCmd.Flags().StringVarP(&file, "file", "f", "", "file to convert")
